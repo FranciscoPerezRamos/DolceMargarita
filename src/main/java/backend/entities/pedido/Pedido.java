@@ -1,10 +1,12 @@
-package backend.entities;
+package backend.entities.pedido;
 
 import backend.entities.chocolates.Chocolate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @Entity
 public class Pedido {
@@ -17,8 +19,12 @@ public class Pedido {
     @OneToMany(cascade = {CascadeType.ALL})
     private List<Chocolate> chocolates;
 
-    public Pedido(){
+    @Column
+    private Integer dniClientePedido;
+
+    public Pedido(Cliente cliente){
         this.chocolates = new ArrayList<>();
+        this.dniClientePedido = cliente.getDni();
     }
 
     public void agregarChocolate(Chocolate choco1) {
@@ -35,5 +41,17 @@ public class Pedido {
 
     public Integer getId() {
         return id;
+    }
+
+    public void quitarChocolate(Chocolate c) {
+        chocolates.remove(c);
+    }
+
+    public Integer getCantidadChocolates() {
+        return this.getChocolates().size();
+    }
+
+    public Integer getDNICliente(){
+        return this.dniClientePedido;
     }
 }

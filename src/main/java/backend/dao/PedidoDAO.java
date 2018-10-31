@@ -1,6 +1,6 @@
 package backend.dao;
 
-import backend.entities.Pedido;
+import backend.entities.pedido.Pedido;
 
 public class PedidoDAO extends HibernateDAO<Pedido> {
 
