@@ -25,6 +25,8 @@ public class Cliente {
     @Column
     private String nombreYApellido;
 
+    public Cliente(){}
+
     public Cliente(Integer unDni, String unNombreYapellido, Integer unTelefono, String unaDireccion, String unEmail) {
         this.dni = unDni;
         this.nombreYApellido = unNombreYapellido;

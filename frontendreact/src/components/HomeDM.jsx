@@ -62,6 +62,7 @@ export default class HomeDM extends React.Component {
   renderCarousel() {
     return(
       <Carousel wrapAround="true" transitionMode="fade" autoplay="true" withoutControls="true ">
+          <img src='https://i0.wp.com/www.wallpapersbyte.com/wp-content/uploads/2015/06/White-Daisies-Flowers-Petals-Blur-WallpapersByte-com-1366x768.jpg?ssl=1' className="img-sizes" alt="Fabrica de chocolate" />
           <img src='https://images5.alphacoders.com/431/thumb-1920-431467.jpg' className="img-sizes" alt="Fabrica de chocolate" />
           <img src='https://schrammsflowers.com/wp-content/uploads/2017/12/chocolate.jpg' className="img-sizes" alt="Fabrica de chocolate" />
           <img src='https://wallpaper.wiki/wp-content/uploads/2017/04/wallpaper.wiki-HD-Chocolate-Background-PIC-WPC006562.jpg' className="img-sizes" alt="Fabrica de chocolate" />
@@ -90,7 +91,13 @@ export default class HomeDM extends React.Component {
         </FrontSide>
         <BackSide
           style={{ backgroundColor: '#FFFACD'}}>
-         <h3 align="left">Descripcion del producto</h3>
+         <h3 align="left">
+          Precios <br></br>
+          
+          Figuras: Desde $300
+          Huevos : $20- $1800
+          Bombones: Kg $1500
+          </h3>
         </BackSide>
       </Flippy>
       
@@ -109,6 +116,7 @@ export default class HomeDM extends React.Component {
         <div className="card-body" align="center">
           <h3 className="card-title textT">{item.nombre}</h3>
           <div className="card-text">
+          
           <Link to="/confirm">              
               
           <span className="badge badge-secondary">Añadir a carrito</span>
@@ -126,6 +134,7 @@ export default class HomeDM extends React.Component {
     return(
       <div>
         <Header />
+        
       </div>
     );
   }
@@ -147,10 +156,15 @@ export default class HomeDM extends React.Component {
         </div>
         <div >
           <h5  className="subtitle2" > Nuestra Seleccion  </h5 >
+          <script src="https://apis.google.com/js/platform.js" async defer></script>
+          
+          <meta name="google-signin-client_id" content="https://www.googleapis.com/oauth2/v1/certs.apps.googleusercontent.com"></meta>
+          <div class="g-signin2" data-onsuccess="onSignIn"></div>
         </div>
         <div align="center">
           <div className="flex paddingG" align="center">
             {this.state.formas.map( f => this.renderFlippy(f))}
+            
           </div>
         </div>
       </div>

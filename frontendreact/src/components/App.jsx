@@ -11,6 +11,7 @@ import Tamanio from './Tamaño.jsx';
 import LastView from './LastView.jsx';
 import Tipo from './Tipo.jsx';
 import Forma from './Forma.jsx';
+import LastView2 from './LastView2.jsx';
 
 export default class App extends React.Component {
   render() {
@@ -18,6 +19,7 @@ export default class App extends React.Component {
       <BrowserRouter>
           <Switch>
             <Route exact path="/confirm" component={LastView} />
+            <Route exact path="/login" component={LastView2} />
             <Route exact path="/tipo" component={Tipo} />
             <Route exact path="/tamanio" component={Tamanio} />
             <Route exact path="/forma" component={Forma} />
