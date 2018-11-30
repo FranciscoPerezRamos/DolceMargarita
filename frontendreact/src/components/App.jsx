@@ -12,12 +12,14 @@ import LastView from './LastView.jsx';
 import Tipo from './Tipo.jsx';
 import Forma from './Forma.jsx';
 import LastView2 from './LastView2.jsx';
+import CarritoView from './CarritoView';
 
 export default class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
           <Switch>
+            <Route exact path="/carrito" component={CarritoView} />
             <Route exact path="/confirm" component={LastView} />
             <Route exact path="/login" component={LastView2} />
             <Route exact path="/tipo" component={Tipo} />

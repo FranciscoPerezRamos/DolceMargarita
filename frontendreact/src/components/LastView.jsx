@@ -3,8 +3,20 @@ import Ionicon from 'react-ionicons';
 import '../dist/LoginDm.css';
 import CreditCardInput from 'react-credit-card-input';
 
-
 export default class LastView extends React.Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      nombreCliente: "",
+      apellidoCliente: "",
+      emailCliente: "",
+      dniCliente: null,
+      telefonoCliente: null,
+    };
+  }
+
   finishSell() {
     return (
       <div>
@@ -15,75 +27,76 @@ export default class LastView extends React.Component {
     );
   }
 
+  setNombre = (nombre) => {
+    this.setState({nombreCliente: nombre})
+  }
+
+  setNombre(apellido) {
+    this.setState({apellidoCliente: apellido})
+  }
+
+  setEmail(email) {
+    this.setState({emailCliente: email})
+  }
+
+  setDni(dni) {
+    this.setState({dniCliente: dni})
+  }
+
+  setTelefono(telefono) {
+    this.setState({telefonoCliente: telefono})
+  }
+
   render() {
     return (
-      <div align="center">
-      <h4 align="center" className="colorWhite titleFinsh">Datos de Tarjeta</h4>
-
-        <CreditCardInput  fieldClassName="input"     />
-        <form>
-            
-            
-          </form>
-        <div>
+      <div>
         <h4 align="center" className="colorWhite titleFinsh">Datos de cliente</h4>
-          <form>
-            <label>
-              Nombre:
-    <input type="text" name="Nombre y Apellido" />
-            </label>
-           
-          </form>
-
-         < form>
-            <label>
-              Apellido:
-    <input type="text" name="Nombre y Apellido" />
-            </label>
-           
-          </form>
-          
-
-          <form>
-            <label>
-              E-Mail :
-    <input type="text" name="Nombre y Apellido" />
-            </label>
-           
-          </form>
-
-         
-
-
-
-          <form>
-            <label>
-              D.N.I  :
-    <input type="number" name="Nombre y Apellido" />
-            </label>
-            
-          </form>
-          <form>
-            <label>
-              Telefono:
-    <input type="number" name="Nombre y Apellido" />
-            </label>
-            
-          </form>
-          
+        <form>
           <label>
-          <h4 align="center" className="colorWhite titleFinsh">Cantidad de productos</h4>
-              Cantidad:
-    <input type="number" name="Nombre y Apellido" />
-            </label>
-          <h4 align="center" className="colorWhite titleFinsh">Finalizar compra</h4>
-          
-         
-        </div>
-       
-          
+            Nombre:
+          </label>
+          <input type="text" name="nombre" value={this.state.nombreCliente} onChange={this.setNombre}/>  
+        </form>
+
+        < form>
+          <label>
+            Apellido:
+          </label>
+          <input type="text" name="apellido" value={this.state.apellidoCliente} onChange={this.setApellido}/>
+        </form>
+        
+        <form>
+          <label>
+            E-Mail :
+          </label>
+          <input type="text" name="email" value={this.state.emailCliente} onChange={this.setEmail} />
+        </form>
+
+        <form>
+          <label>
+            D.N.I  :
+          </label>
+          <input type="number" name="dni" value={this.state.dniCliente} onChange={this.setDni} />  
+        </form>
+
+        <form>
+          <label>
+            Telefono:
+          </label>
+          <input type="number" name="telefono" value={this.state.telefonoCliente} onChange={this.setTelefono} />
+        </form>
+        
+        <h4 align="center" className="colorWhite titleFinsh">Cantidad de productos</h4>
+        <form>
+          <label>
+            Cantidad:
+          </label>
+          <input type="number" name="Nombre y Apellido" />
+        </form>
+            
+        <h4 align="center" className="colorWhite titleFinsh">Finalizar compra</h4>
+        
         <div>
-          
           <button
             className="colorBotton"
             type="button"
@@ -91,7 +104,6 @@ export default class LastView extends React.Component {
           >
             <Ionicon icon="ios-cart" fontSize="35px" />
             Aceptar
-            
           </button>
         </div>
       </div>
