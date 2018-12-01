@@ -6,7 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
-@Entity
+@Entity(name = "Huevos")
 public class Huevos extends Forma{
 
     @ManyToOne(cascade = {CascadeType.ALL})
