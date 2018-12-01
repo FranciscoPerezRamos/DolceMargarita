@@ -1,9 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../dist/LoginDm.css';
-import { Link } from 'react-router-dom';
 import API from '../service/api.js';
-import Ionicon from 'react-ionicons';
 import Carousel from 'nuka-carousel';
 import Header from './Header.jsx';
 import Flippy, { FrontSide, BackSide } from 'react-flippy'; 
@@ -31,24 +28,6 @@ export default class HomeDM extends React.Component {
       </div>
     );
   }
-  switchTypesOfChocolates(tipoDeChocolate){
-    let linkToShow;
-     switch(tipoDeChocolate) {
-       case "Figuras":
-           linkToShow = "/forma"
-           break;
- 
-       case "Huevos":
-       linkToShow = "/tipo"
-           break;
- 
-       case "Bombones":
-        linkToShow = "/tamanio"
-           break;
-       
-           default :  linkToShow = "/forma"
-     }
-    }
 
   renderImg(img) {
     return(
@@ -80,7 +59,7 @@ export default class HomeDM extends React.Component {
         flipDirection="horizontal"
         ref={(r) => this.flippy = r} 
         style={{ width: '350px', height: '350px', padding: '10px'}}
-        
+        className="col"
       >
         <FrontSide
           style={{
@@ -151,17 +130,10 @@ export default class HomeDM extends React.Component {
         <div align="center">
           {this.renderCarousel()}
         </div>
-        <div >
-          <h5  className="subtitle2" > Nuestra Seleccion  </h5 >
-          <script src="https://apis.google.com/js/platform.js" async defer></script>
-          
-          <meta name="google-signin-client_id" content="https://www.googleapis.com/oauth2/v1/certs.apps.googleusercontent.com"></meta>
-          <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        </div>
-        <div align="center">
-          <div className="flex paddingG" align="center">
+        <div>
+          <h5  className="subtitle2" > Nuestra Seleccion  </h5>
+          <div className="row">
             {this.state.formas.map( f => this.renderFlippy(f))}
-            
           </div>
         </div>
       </div>

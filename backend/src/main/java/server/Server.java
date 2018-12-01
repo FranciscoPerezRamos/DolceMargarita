@@ -78,7 +78,7 @@ public class Server extends ResultFactory {
         return ResultFactory.ok(this.JSONUtils.toJson(data));
     }
 
-    @Get("/tamanios")
+        @Get("/tamanios")
     public Result getTamanios(final String target, final Request baseRequest,
                                 final HttpServletRequest request, final HttpServletResponse response) {
         response.setContentType(ContentType.APPLICATION_JSON);
@@ -278,6 +278,23 @@ public class Server extends ResultFactory {
             response.setContentType("application/json");
 
             Result result = getTamanios(target, baseRequest, request, response);
+            result.process(response);
+
+            response.addHeader("Access-Control-Allow-Origin", "*");
+            baseRequest.setHandled(true);
+            return;
+        }
+
+        if (request.getMethod().equalsIgnoreCase("Get") && matcher.matches() && endPoint.equals("/product/(\\w+)")){
+            // take parameters from request
+
+            // take variables from url
+            String type = matcher.group(1);
+            // set default content type (it can be overridden during next call)
+
+            response.setContentType("application/json");
+
+            Result result = getProduct(Integer.valueOf(type), target, baseRequest, request, response);
             result.process(response);
 
             response.addHeader("Access-Control-Allow-Origin", "*");
