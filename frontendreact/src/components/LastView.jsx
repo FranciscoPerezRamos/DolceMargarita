@@ -1,10 +1,11 @@
 import React from 'react';
 import Ionicon from 'react-ionicons';
-import '../dist/LoginDm.css';
+import '../dist/LastView.css';
 import CreditCardInput from 'react-credit-card-input';
+import ProductoEnCarrito from './ProductoEnCarrito'
 
 export default class LastView extends React.Component {
-
+  carrito = []
   constructor(props) {
     super(props)
 
@@ -47,58 +48,100 @@ export default class LastView extends React.Component {
     this.setState({telefonoCliente: telefono})
   }
 
+  mostrarProductos = () => {
+    return (
+      <div>
+        <h4 align="center" className="titulo">Tu Pedido</h4>
+        { 
+          this.carrito.map((producto) =>
+            <ProductoEnCarrito
+              producto={producto}
+            />
+          ) 
+        }
+      </div>
+    )
+  }
+
+  datosCliente = () => {
+    return (
+      <div className="form-cliente">
+        <h4 align="center" className="titulo-cliente">Datos de cliente</h4>
+        <div className="row">
+          <div>
+            <form className="form">
+              <label>Nombre:</label>
+              <input 
+                className="input" 
+                type="text" 
+                name="nombre" 
+                value={this.state.nombreCliente} 
+                onChange={this.setNombre}
+              />  
+            </form>
+          </div>
+          <div>
+            < form className="form" > 
+              <label>E-mail:</label>
+              <input 
+                type="text" 
+                className="input" 
+                name="apellido" 
+                value={this.state.emailCliente} 
+                onChange={this.setEmail}
+              />
+            </form>
+          </div>
+        </div>
+        <div className="row">
+          <div>
+            <form className="form" > 
+              <label>Apellido:</label>
+              <input 
+                type="text" 
+                className="input" 
+                name="apellido" 
+                value={this.state.apellidoCliente} 
+                onChange={this.setApellido}
+              />
+            </form>
+          </div>
+          <div>
+            <form className="form" >
+              <label>D.N.I  :</label>
+              <input 
+                type="number" 
+                className="input" 
+                name="dni" 
+                value={this.state.dniCliente} 
+                onChange={this.setDni} 
+              />  
+            </form>
+          </div>
+        </div>
+        <div className="row">
+          <form className="form" >
+            <label>
+              Telefono:
+            </label>
+            <input type="number" className="input" name="telefono" value={this.state.telefonoCliente} onChange={this.setTelefono} />
+          </form>
+        </div>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div>
-        <h4 align="center" className="colorWhite titleFinsh">Datos de cliente</h4>
-        <form>
-          <label>
-            Nombre:
-          </label>
-          <input type="text" name="nombre" value={this.state.nombreCliente} onChange={this.setNombre}/>  
-        </form>
-
-        < form>
-          <label>
-            Apellido:
-          </label>
-          <input type="text" name="apellido" value={this.state.apellidoCliente} onChange={this.setApellido}/>
-        </form>
-        
-        <form>
-          <label>
-            E-Mail :
-          </label>
-          <input type="text" name="email" value={this.state.emailCliente} onChange={this.setEmail} />
-        </form>
-
-        <form>
-          <label>
-            D.N.I  :
-          </label>
-          <input type="number" name="dni" value={this.state.dniCliente} onChange={this.setDni} />  
-        </form>
-
-        <form>
-          <label>
-            Telefono:
-          </label>
-          <input type="number" name="telefono" value={this.state.telefonoCliente} onChange={this.setTelefono} />
-        </form>
-        
-        <h4 align="center" className="colorWhite titleFinsh">Cantidad de productos</h4>
-        <form>
-          <label>
-            Cantidad:
-          </label>
-          <input type="number" name="Nombre y Apellido" />
-        </form>
+        { this.mostrarProductos() }
+        { this.datosCliente() }
             
-        <h4 align="center" className="colorWhite titleFinsh">Finalizar compra</h4>
+        <h4 align="center" className="titulo">Finalizar compra</h4>
         
-        <div>
+        <div className="boton-aceptar">
           <button
-            className="colorBotton"
+            className= "btn-dm"
             type="button"
             onClick={() => this.finishSell()}
           >
