@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 public class Server extends ResultFactory {
 
     private ServiceChocolate servicioDeChocolates;
-    private ServiceForma formas;
+    private ServiceForma serviceFormas;
     private ServiceTipoChocolate tiposChocolate;
     private JSONUtils JSONUtils;
     private ServiceTamanio tamanio;
@@ -46,7 +46,7 @@ public class Server extends ResultFactory {
     public Server() {
         this.JSONUtils = new JSONUtils();
         this.servicioDeChocolates = new ServiceChocolate();
-        this.formas = new ServiceForma();
+        this.serviceFormas = new ServiceForma();
         this.tiposChocolate = new ServiceTipoChocolate();
         this.tamanio = new ServiceTamanio();
 
@@ -91,26 +91,25 @@ public class Server extends ResultFactory {
         return ResultFactory.ok(this.JSONUtils.toJson(data));
     }
 
-    @Get("/formas")
+    @Get("/serviceFormas")
     public Result getFormas(final String target, final Request baseRequest,
                             final HttpServletRequest request, final HttpServletResponse response) {
         response.setContentType(ContentType.APPLICATION_JSON);
 
         List<FormaFront> data =
-                this.formas.recuperarTodos().stream().map(t -> new FormaFront
+                this.serviceFormas.recuperarTodos().stream().map(t -> new FormaFront
                         (t.getClass().getSimpleName(), t.getImg())).collect(Collectors.toList());
 
 
         return ResultFactory.ok(this.JSONUtils.toJson(data));
     }
 
-
     @Get("/product/:type")
     public Result getProduct(final Integer id ,final String target, final Request baseRequest,
-                             final HttpServletRequest request, final HttpServletResponse response) {
+                            final HttpServletRequest request, final HttpServletResponse response) {
         response.setContentType(ContentType.APPLICATION_JSON);
 
-        Forma data = this.formas.recuperar(id);
+        Forma data = this.serviceFormas.recuperar(id);
 
         return ResultFactory.ok(this.JSONUtils.toJson(data));
     }
@@ -176,7 +175,7 @@ public class Server extends ResultFactory {
     }
 
     @Override
-    public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void handle( String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         {
             handleGet(target, baseRequest, request, response, "/chocolates");
         }
@@ -184,7 +183,7 @@ public class Server extends ResultFactory {
             handleGet(target, baseRequest, request, response, "/tiposChocolate");
         }
         {
-            handleGet(target, baseRequest, request, response, "/formas");
+            handleGet(target, baseRequest, request, response, "/serviceFormas");
         }
         {
             handleGet(target, baseRequest, request, response, "/tamanios");
@@ -198,6 +197,7 @@ public class Server extends ResultFactory {
         {
             handlePost(target, baseRequest, request, response, "/testMP");
         }
+
     }
 
     private void handleGet(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response, String endPoint) {
@@ -213,6 +213,23 @@ public class Server extends ResultFactory {
             response.setContentType("application/json");
 
             Result result = getTiposChocolate(target, baseRequest, request, response);
+            result.process(response);
+
+            response.addHeader("Access-Control-Allow-Origin", "*");
+            baseRequest.setHandled(true);
+            return;
+        }
+
+        if (request.getMethod().equalsIgnoreCase("Get") && matcher.matches() && endPoint.equals("/product/(\\w+)")){
+            // take parameters from request
+
+            // take variables from url
+            String type = matcher.group(1);
+            // set default content type (it can be overridden during next call)
+
+            response.setContentType("application/json");
+
+            Result result = getProduct(Integer.valueOf(type), target, baseRequest, request, response);
             result.process(response);
 
             response.addHeader("Access-Control-Allow-Origin", "*");
@@ -236,7 +253,7 @@ public class Server extends ResultFactory {
             return;
         }
 
-        if (request.getMethod().equalsIgnoreCase("Get") && matcher.matches() && endPoint.equals("/formas")) {
+        if (request.getMethod().equalsIgnoreCase("Get") && matcher.matches() && endPoint.equals("/serviceFormas")) {
             // take parameters from request
 
             // take variables from url
