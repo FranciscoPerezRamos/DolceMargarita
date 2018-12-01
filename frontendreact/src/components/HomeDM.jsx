@@ -31,7 +31,24 @@ export default class HomeDM extends React.Component {
       </div>
     );
   }
-
+  switchTypesOfChocolates(tipoDeChocolate){
+    let linkToShow;
+     switch(tipoDeChocolate) {
+       case "Figuras":
+           linkToShow = "/forma"
+           break;
+ 
+       case "Huevos":
+       linkToShow = "/tipo"
+           break;
+ 
+       case "Bombones":
+        linkToShow = "/tamanio"
+           break;
+       
+           default :  linkToShow = "/forma"
+     }
+    }
 
   renderImg(img) {
     return(
@@ -83,15 +100,13 @@ export default class HomeDM extends React.Component {
           </h3>
         </BackSide>
       </Flippy>
-      
-    
-    
-      ); 
-    
+    ); 
   }
 
-
-
+  seleccionarForma = (item) => {
+    this.props.history.push(`product/${item.nombre}`)
+  }
+  
   createCardContent(item) { 
     return (
       <div>
@@ -99,14 +114,13 @@ export default class HomeDM extends React.Component {
         <div className="card-body" align="center">
           <h3 className="card-title textT">{item.nombre}</h3>
           <div className="card-text">
-          
-          <Link to="/confirm">              
-              
-          <span className="badge badge-secondary">Añadir a carrito</span>
-          </Link>
-          
-             
-            <Ionicon icon="md-cart" color="goldenrod" /> 
+            <button
+              className="btn-dm"
+              type="button"
+              onClick={() => this.seleccionarForma(item)}
+            >
+              Seleccionar
+            </button>
           </div>
         </div>
       </div>
