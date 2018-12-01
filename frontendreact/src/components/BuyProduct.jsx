@@ -4,6 +4,7 @@ import '../dist/buyProduct.css';
 import API from '../service/api.js';
 import Header from './Header.jsx';
 import Ionicon from 'react-ionicons';
+import Selector from '../components/Selector.jsx';
 
 
 export default class BuyProduct extends React.Component {
@@ -16,6 +17,8 @@ export default class BuyProduct extends React.Component {
             quantity: 1,
             quantityInQuaters: 250,
             quantityInQuatersDecimal: 0.250,
+            tipos: [],
+            tamanios: [],
         };
     }
 
@@ -23,185 +26,31 @@ export default class BuyProduct extends React.Component {
         API.get(`/product/${this.props.match.params.type}`)
             .then(response => this.setState({ product: response }))
             .catch(console.log('Error ggg'));
+        
+        this.tiposDeChocolate();
+        this.tamniosDeChocolate();
     }
 
-    renderContent() {
-        const type = this.props.match.params.type.toString().toLowerCase();
-        switch(type) {
-            
-            case 'bombones':
-                return this.renderContentBombones();
+    tiposDeChocolate() {
+        API.get("/tiposChocolate")
+         .then(response => this.setState({ tipos: response }))
+         .catch(console.log('Error encontrando chocolitios'));
+     }
+     
+     tamniosDeChocolate() {
+        API.get("/tamanios")
+         .then(response => this.setState({ tamanios: response }))
+         .catch(console.log('Error encontrando tamnios de chocolitios'));
+     }
 
-            case 'figuras':
-                return this.renderContentFiguras();
-
-            default:
-                return this.renderContentHuevos();
-        }
-    }
-
-    renderTitile() {
-        return(
-            <h1>{
-                this.firstUppserCase(this.props.match.params.type)
-                +this.props.match.params.type.substr(1, this.props.match.params.type.lenght)
-            }</h1>
-        );
-    }
-
-    firstUppserCase(string) {
-        return this.props.match.params.type.charAt(0).toUpperCase();
-    }
-
-    renderContentBombones() {
+    renderTiposDeChocolate() {
         return(
             <div>
-                {this.renderTitile()}
-                <div className="displayFlex">
-                    {this.renderBombonesInfoAndImg()}
-                </div>
+                <Selector options={this.state.tipos} />
             </div>
         );
     }
 
-    renderContentFiguras() {
-        return(
-            <div>
-                {this.renderTitile()}
-                <div className="displayFlex">
-                    {this.renderGralInfoAndImg()}
-                </div>
-            </div>
-        );
-    }
-
-
-    renderGralInfoAndImg() {
-        return (
-            <div className="row"> 
-                {this.renderImg()}
-                {this.renderInfoGral()}
-            </div>
-        );
-    }
-
-    renderInfoGral() {
-        return(
-            <div className="col">
-                <h5><span>
-                    {this.props.match.params.type.toLowerCase() === 'figuras'? this.textFiguras() : this.textHuevos()}
-                    </span></h5>
-                <div>
-                    {this.renderCounter()}
-                    {this.renderButtonToConfirm()}
-                </div>
-            </div>
-        );
-    }
-
-    textFiguras() {
-        return "Figuras de chocolates, arte hecho chocolate"
-    }
-
-    textHuevos() {
-        return "Increibles huevos de chocolates de diferentes tamaños"
-    }
-
-    renderContentHuevos() {
-        return(
-            <div>
-                {this.renderTitile()}
-                <div className="displayFlex container">
-                    {this.renderGralInfoAndImg()}
-                </div>
-            </div>
-        );
-    }
-
-    renderUnits() {
-        return this.props.match.params.type.toLowerCase() === 'bombones' ? this.renderQuartersOrKg() : 'Uds'
-    }
-
-    renderQuantity() {
-        return this.props.match.params.type.toLowerCase() === 'bombones' ? this.renderQuartersOrKgWithComa() : this.state.quantity
-    }
-
-    renderQuartersOrKg() {
-        return this.state.quantityInQuaters >= 1000? 'Kgr': 'Gr'
-    }
-
-    renderQuartersOrKgWithComa() {
-        return this.state.quantityInQuaters >= 1000?  this.state.quantityInQuatersDecimal : this.state.quantityInQuaters
-    }
-
-
-    renderStateOfQuantity() {
-        return (
-            <div>
-                <span className="spanC">{this.renderQuantity()} {this.renderUnits()}</span>
-            </div>
-        );
-    }
-
-    addQuantity() {
-        if(this.props.match.params.type.toLowerCase() === 'bombones') {
-            this.setState({ quantityInQuatersDecimal: this.state.quantityInQuatersDecimal + 0.250})
-            this.setState({ quantityInQuaters: this.state.quantityInQuaters + 250})
-        }
-        else {
-            this.setState({ quantity: this.state.quantity + 1})
-        }
-    }
-
-    removeQuantity() {
-        if(this.props.match.params.type.toLowerCase() === 'bombones') {
-            if(this.state.quantityInQuaters > 250) {
-                this.setState({ quantityInQuaters: this.state.quantityInQuaters - 250})
-                this.setState({ quantityInQuatersDecimal: this.state.quantityInQuatersDecimal - 0.250})
-            }
-        }
-        else {
-           if(this.state.quantity > 1) this.setState({ quantity: this.state.quantity - 1})
-        }
-    }
-
-    renderCounter() {
-        return(
-            <div className="displayFlex">
-                <button type="button" className="btn btn-outline-warning" onClick={()=> (this.removeQuantity())}>
-                    <Ionicon icon="ios-remove-circle" color="goldenrod" fontSize="35px" />
-                </button>
-                    {this.renderStateOfQuantity()}
-                <button type="button" className="btn btn-outline-warning" onClick={()=> (this.addQuantity())}>
-                    <Ionicon icon="ios-add-circle" color="goldenrod" fontSize="35px" />
-                </button>
-            </div>
-        );
-    }
-
-    renderBombonesInfoAndImg() {
-        return (
-            <div className="row"> 
-                {this.renderImg()}
-                {this.renderInfoBombon()}
-            </div>
-        );
-    }
-
-    renderInfoBombon() {
-        return (
-            <div className="col">
-                <h5><span>
-                    Bombones finos surtidos de chocolates blanco,
-                    chocolate con leche y semi-amargo
-                    </span></h5>
-                <div>
-                    {this.renderCounter()}
-                    {this.renderButtonToConfirm()}
-                </div>
-            </div>
-        );
-    }
 
     agregarAlCarrito = () => {
         let producto = {
@@ -223,6 +72,60 @@ export default class BuyProduct extends React.Component {
         );
     }
 
+    removeQuantity() {
+        if(this.state.quantity > 1) this.setState({ quantity: this.state.quantity - 1});
+    }
+
+    addQuantity() {
+        this.setState({ quantity: this.state.quantity + 1});
+    }
+
+
+    renderUnits() {
+        return 'Uds';
+    }
+
+    renderQuantity() {
+        return this.state.quantity;
+    }
+
+    renderStateOfQuantity() {
+        return (
+            <div className="col">
+                <span className="spanC">{this.renderQuantity()} {this.renderUnits()}</span>
+            </div>
+        );
+    }
+
+    renderCounter() {
+        return(
+            <div>
+                <button type="button" className="btn btn-outline-warning col" onClick={()=> (this.addQuantity())}>
+                    <Ionicon icon="ios-arrow-up" color="goldenrod" fontSize="35px" />
+                </button>
+                    {this.renderStateOfQuantity()}
+                <button type="button" className="btn btn-outline-warning col" onClick={()=> (this.removeQuantity())}>
+                    <Ionicon icon="ios-arrow-down" color="goldenrod" fontSize="35px" />
+                </button>
+            </div>
+        );
+    }
+
+
+    renderInfo() {
+        return (
+            <div className="col">
+                <h5>
+                    <span>
+                        {this.textDescription()}
+                    </span>
+                </h5>
+                {this.renderItems()}
+            </div>
+        );
+    }
+
+
     renderImg() {
         return (
             <div className="col">
@@ -231,15 +134,25 @@ export default class BuyProduct extends React.Component {
         );
     }
 
-    img() {
-        switch(this.props.match.params.type.toLowerCase()){
-            case 'bombones':
-                return "https://t1.uc.ltmcdn.com/images/5/3/9/img_como_hacer_bombones_de_chocolate_con_licor_37935_600.jpg"
-            case 'figuras':
-                return "http://www.bellasfondos.eu/pics/2016/1220/1/chocolate-milk-horses-background-227795.jpg";
-            default:
-                return "http://aspic.es/wp-content/uploads/2016/03/Huevos-de-chocolate-20.jpg"
-        }
+    renderInfoAndImg() {
+        return (
+            <div className="row"> 
+                {this.renderImg()}
+                {this.renderInfo()}
+            </div>
+        );
+    }
+    
+
+    renderContent() {
+        return(
+            <div>
+               <h1>{this.renderTitle()}</h1>
+                <div className="container">
+                    {this.renderInfoAndImg()}
+                </div>
+            </div>
+        );
     }
 
     render() {

@@ -2,6 +2,7 @@ package server;
 
 import backend.entities.Pedido;
 import backend.entities.chocolates.Chocolate;
+import backend.entities.chocolates.Forma.Forma;
 import backend.service.ServiceChocolate;
 import backend.service.ServiceForma;
 import backend.service.ServiceTamanio;
@@ -77,7 +78,7 @@ public class Server extends ResultFactory {
         return ResultFactory.ok(this.JSONUtils.toJson(data));
     }
 
-    @Get("/tamanios")
+        @Get("/tamanios")
     public Result getTamanios(final String target, final Request baseRequest,
                                 final HttpServletRequest request, final HttpServletResponse response) {
         response.setContentType(ContentType.APPLICATION_JSON);
@@ -105,14 +106,11 @@ public class Server extends ResultFactory {
 
 
     @Get("/product/:type")
-    public Result getProduct(final String target, final Request baseRequest,
-                            final HttpServletRequest request, final HttpServletResponse response) {
+    public Result getProduct(final Integer id ,final String target, final Request baseRequest,
+                             final HttpServletRequest request, final HttpServletResponse response) {
         response.setContentType(ContentType.APPLICATION_JSON);
 
-        List<FormaFront> data =
-                this.formas.recuperarTodos().stream().map(t -> new FormaFront
-                        (t.getClass().getSimpleName(), t.getImg())).collect(Collectors.toList());
-
+        Forma data = this.formas.recuperar(id);
 
         return ResultFactory.ok(this.JSONUtils.toJson(data));
     }
@@ -192,6 +190,9 @@ public class Server extends ResultFactory {
             handleGet(target, baseRequest, request, response, "/tamanios");
         }
         {
+            handleGet(target, baseRequest, request, response, "/product/(\\w+)");
+        }
+        {
             handlePost(target, baseRequest, request, response, "/pedidos");
         }
         {
@@ -260,6 +261,23 @@ public class Server extends ResultFactory {
             response.setContentType("application/json");
 
             Result result = getTamanios(target, baseRequest, request, response);
+            result.process(response);
+
+            response.addHeader("Access-Control-Allow-Origin", "*");
+            baseRequest.setHandled(true);
+            return;
+        }
+
+        if (request.getMethod().equalsIgnoreCase("Get") && matcher.matches() && endPoint.equals("/product/(\\w+)")){
+            // take parameters from request
+
+            // take variables from url
+            String type = matcher.group(1);
+            // set default content type (it can be overridden during next call)
+
+            response.setContentType("application/json");
+
+            Result result = getProduct(Integer.valueOf(type), target, baseRequest, request, response);
             result.process(response);
 
             response.addHeader("Access-Control-Allow-Origin", "*");
