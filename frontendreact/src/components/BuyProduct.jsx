@@ -203,18 +203,24 @@ export default class BuyProduct extends React.Component {
         );
     }
 
+    agregarAlCarrito = () => {
+        let producto = {
+            forma: this.state.forma,
+            tipo: this.state.tipo,
+            cantidad: this.state.quantity
+        }
+        this.props.history.push('/carrito');
+    }
+
     renderButtonToConfirm() {
         return(
             <div>
-                <button type="button" className="btn btn-block bt-color" onClick={()=> (this.redirect())}>
-                    <span>AñADIR A CARRITO</span>
+                <br/>
+                <button type="button" className="btn btn-block bt-color" onClick={this.agregarAlCarrito}>
+                    <span>Añadir a Carrito</span>
                 </button>
             </div>
         );
-    }
-
-    redirect() {
-        this.props.history.push('/carrito');
     }
 
     renderImg() {
