@@ -133,7 +133,7 @@ public class Server extends ResultFactory {
 
             String id = JSONUtils.getPropertyValue(body,"id");
             String title = JSONUtils.getPropertyValue(body,"title");
-            Integer quantity = JSONUtils.getPropertyAsInteger(body,"quantity");
+            Integer quantity = JSONUtils.getPropertyAsInteg++er(body,"quantity");
             String currencyId = JSONUtils.getPropertyValue(body,"currencyId");
             float unitePrice = Float.parseFloat(JSONUtils.getPropertyValue(body,"unitePrice"));
 
