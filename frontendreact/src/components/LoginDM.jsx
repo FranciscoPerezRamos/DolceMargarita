@@ -34,6 +34,8 @@ class LoginDM extends React.Component {
 
   renderTextForLogdinDM() {
     return(
+      
+
       <h5 className="form-headin2">
         Dolce Margarita nace el 10 de julio de 2012 en la ciudad de Berazategui, por iniciativa Elisabet Tassiello.
         Fuimos inicialmente concebidos como un hobby, pero en el año 2013 decidimos emprender en la venta de chocolates, logrando de esta manera conformar una variada gama de productos para satisfacer las necesidades de los clientes.
@@ -81,6 +83,7 @@ class LoginDM extends React.Component {
 
   renderContent() {
     return(
+      
       <div className="loging-dm flex">
         <div className="main-div">
           <div>
@@ -89,13 +92,23 @@ class LoginDM extends React.Component {
           </div>
           <Link to="/login">              
           
-          <button  type="button" className="btn-dm">Registrarse <Ionicon icon="logo-google" fontSize="25px" /></button>
+          <button 
+           type="button" 
+          className="btn-dm">
+          Iniciar sesion en Facebook
+           <Ionicon icon="logo-facebook"
+           fontSize="25px" /></button>
+
           </Link>
+
+          
           {this.renderButtonWithFunction('Empezar')}
           
         </div>
         {this.renderCarousel()}
       </div>
+
+      
     );
   }
 

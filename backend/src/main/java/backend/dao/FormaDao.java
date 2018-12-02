@@ -22,4 +22,5 @@ public class FormaDao extends HibernateDAO<Forma> {
 
         return query.getResultList();
     }
+
 }

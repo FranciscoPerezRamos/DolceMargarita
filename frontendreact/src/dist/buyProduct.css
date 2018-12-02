@@ -1,0 +1,20 @@
+h1 {
+    font-size: 50px;
+    text-align: center;
+    color: goldenrod;
+}
+
+.displayFlex {
+    display: flex;
+}
+
+
+.spanC {
+    padding-left: 180px;
+    padding-right: 180px;
+    font-size: 40px;
+}
+
+.bt-color {
+    background-color: goldenrod;
+}

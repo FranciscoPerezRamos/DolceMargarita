@@ -1,0 +1,35 @@
+.titulo {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    color: goldenrod;
+}
+
+.titulo-cliente {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto 30px;
+    color: goldenrod; 
+}
+
+.form {
+    width: 400px; 
+}
+
+.input {
+    margin-left: 15px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    margin-left: 140px;
+    margin-bottom: 10px;
+}
+
+.boton-aceptar {
+    display: flex;
+    width: 150px;
+    justify-content: center;
+    margin-left: 45%;    
+}
