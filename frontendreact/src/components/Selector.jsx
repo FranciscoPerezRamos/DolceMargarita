@@ -12,13 +12,14 @@ export default class Selector extends React.Component {
         }
     }
   handleChange = (selectedOption) => {
+    this.props.selectOption(selectedOption.value);
     this.setState({ selectedOption });
     console.log(`Option selected:`, selectedOption);
   }
 
   options() {
     return this.props.options.map(item => {
-        return {value: item.nombre.toLowerCase(), label: item.nombre}
+        return {value: item, label: item.nombre}
     });
   }
 

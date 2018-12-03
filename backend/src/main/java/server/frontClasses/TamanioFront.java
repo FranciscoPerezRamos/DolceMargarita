@@ -3,10 +3,10 @@ package server.frontClasses;
 public class TamanioFront {
 
     public String nombre;
-    public String img;
+    public Integer price;
 
-    public TamanioFront(String nombre, String img) {
+    public TamanioFront(String nombre, Integer price) {
         this.nombre = nombre;
-        this.img = img;
+        this.price = price;
     }
 }

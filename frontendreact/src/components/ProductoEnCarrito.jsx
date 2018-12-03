@@ -12,16 +12,28 @@ export default class ProductoEnCarrito extends React.Component {
                         {this.props.producto.forma}
                     </div>
                 </div>
-                <div className="tipo">
+                <div className="custom-label">
                     <label>Tipo: </label>
                     <div className="contenido">
                         {this.props.producto.tipo}
                     </div>
                 </div>
-                <div className="cantidad">
+                <div className="custom-label">
+                    <label>Tamaño: </label>
+                    <div className="contenido">
+                        {this.props.producto.tamanio}
+                    </div>
+                </div>
+                <div className="custon-label">
                     <label>Cantidad: </label>
                     <div className="contenido">
                         {this.props.producto.cantidad}
+                    </div>
+                </div>
+                <div className="custon-label">
+                    <label>Precio: </label>
+                    <div className="contenido">
+                        {this.props.producto.precio}
                     </div>
                 </div>
                 <div className="eliminar">

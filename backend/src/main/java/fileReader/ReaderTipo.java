@@ -17,7 +17,6 @@ public class ReaderTipo extends CSVFileReader<TipoChocolate> {
     protected TipoChocolate parseLine(String[] line) {
         try {
             TipoChocolate tipoChocolate = (TipoChocolate) Class.forName(line[2].trim()).newInstance();
-            tipoChocolate.addImg(line[3].trim());
             return tipoChocolate;
         } catch (InstantiationException e) {
             e.printStackTrace();
