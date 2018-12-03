@@ -47,7 +47,7 @@ class LoginDM extends React.Component {
   renderGoogleButton(text) {
     return(
       <button
-      className="btn-dm"
+      className="btn-dm2"
       type="button"
       onClick={() => this.googleLogin()}
     >
@@ -58,7 +58,7 @@ class LoginDM extends React.Component {
   renderButtonWithFunction(text) {
     return(
       <button
-      className="btn-dm"
+      className="btn-dm2"
       type="button"
       onClick={() => this.startHome()}
     >
@@ -94,7 +94,7 @@ class LoginDM extends React.Component {
           
           <button 
            type="button" 
-          className="btn-dm">
+          className="btn-dm2">
           Iniciar sesion en Facebook
            <Ionicon icon="logo-facebook"
            fontSize="25px" /></button>
