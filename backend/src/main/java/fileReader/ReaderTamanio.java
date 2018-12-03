@@ -15,7 +15,7 @@ public class ReaderTamanio extends CSVFileReader<Tamanio> {
     protected Tamanio parseLine(String[] line) {
         try {
             Tamanio tamanio = (Tamanio) Class.forName(line[2].trim()).newInstance();
-            tamanio.addImg(line[3].trim());
+            tamanio.addPrice(Integer.valueOf(line[3]));
             return tamanio;
         } catch (InstantiationException e) {
             e.printStackTrace();

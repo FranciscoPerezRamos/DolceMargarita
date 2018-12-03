@@ -1,30 +1,11 @@
 import React from 'react';
-import Ionicon from 'react-ionicons';
 import ProductoEnCarrito from './ProductoEnCarrito';
 import '../dist/CarritoView.css';
 
 export default class CarritoView extends React.Component {
 
-    carrito = [
-        {
-        forma: "Huevos",
-        tipo: "Blanco",
-        cantidad: 1
-        },
-        {
-        forma: "Figura",
-        tipo: "Con leche",
-        cantidad: 3
-        },
-        {
-        forma: "Bombones",
-        tipo: "Surtidos",
-        cantidad: 1
-        }
-    ]
-
     mostrarProductos = () => {
-        return this.carrito.map((producto) =>
+        return this.props.carrito.map((producto) =>
         <ProductoEnCarrito
             producto={producto}
         />

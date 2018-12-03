@@ -19,14 +19,12 @@ export default class BuyProduct extends React.Component {
             quantityInQuatersDecimal: 0.250,
             tipos: [],
             tamanios: [],
+            tipoSeleccionado: '',
+            tamanioSeleccionado: '',
         };
     }
 
     componentDidMount() {
-        API.get(`/product/${this.props.match.params.type}`)
-            .then(response => this.setState({ product: response }))
-            .catch(console.log('Error ggg'));
-        
         this.tiposDeChocolate();
         this.tamniosDeChocolate();
     }
@@ -34,31 +32,28 @@ export default class BuyProduct extends React.Component {
     tiposDeChocolate() {
         API.get("/tiposChocolate")
          .then(response => this.setState({ tipos: response }))
+         
          .catch(console.log('Error encontrando chocolitios'));
-     }
+    }
      
-     tamniosDeChocolate() {
+    tamniosDeChocolate() {
         API.get("/tamanios")
          .then(response => this.setState({ tamanios: response }))
          .catch(console.log('Error encontrando tamnios de chocolitios'));
-     }
+    }
+
+    
 
     renderTiposDeChocolate() {
         return(
             <div>
-                <Selector options={this.state.tipos} />
+                {<Selector options={this.state.tipos} selectOption={this.selectTipo}/>}
             </div>
         );
     }
 
-
-    agregarAlCarrito = () => {
-        let producto = {
-            forma: this.state.forma,
-            tipo: this.state.tipo,
-            cantidad: this.state.quantity
-        }
-        this.props.history.push('/carrito');
+    selectTipo = (tipoSeleccionado) => {
+        this.setState({tipoSeleccionado}); 
     }
 
     renderButtonToConfirm() {

@@ -20,6 +20,24 @@ export default class BuyFiguras extends BuyProduct {
         return "Figuras de chocolates, arte hecho chocolate";
     }
 
+    agregarAlCarrito = () => {
+
+        const precio = this.state.quantity * this.props.precio;
+     
+
+        let producto = {
+            forma: 'Figura',
+            tamanio: 'único',
+            tipo: this.state.tipoSeleccionado.nombre,
+            cantidad: this.state.quantity,
+            precio: precio,
+        }
+
+        this.props.setCarrito(producto);
+     
+        this.props.history.push('/carrito');
+    }
+
     renderItems() {
         return (
             <div>

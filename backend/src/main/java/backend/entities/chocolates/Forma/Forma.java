@@ -11,6 +11,7 @@ public abstract class Forma {
     private Integer id;
 
     private String img;
+    private Integer price;
 
     public Forma(){}
 
@@ -19,4 +20,9 @@ public abstract class Forma {
     public void addImg(String img) { this.img = img; }
 
     public String getImg() { return this.img; }
+
+    public void addPrice(Integer price) { this.price = price; }
+
+    public Integer getPrice() { return this.price; }
+
 }

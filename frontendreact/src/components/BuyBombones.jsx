@@ -29,6 +29,23 @@ export default class BuyBombones extends BuyProduct {
         return "Bombones finos surtidos de chocolates blanco, chocolate con leche y semi-amargo"
     }
 
+    agregarAlCarrito = () => {
+        const precio = (this.state.quantityInQuaters/250) * this.props.precio
+    
+
+        let producto = {
+            forma: 'Bombones',
+            tamanio: 'único',
+            tipo: 'surtido',
+            cantidad: this.renderQuantity() + this.renderUnits(),
+            precio: precio,
+        }
+
+        this.props.setCarrito(producto);
+     
+        this.props.history.push('/carrito');
+    }
+
     renderInfo() {
         return (
             <div className="col">
