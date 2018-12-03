@@ -21,11 +21,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
-<<<<<<< HEAD
-    "yarn": "^1.12.3"
-=======
     "react-select": "^2.1.2"
->>>>>>> 10fba50a8d54a0c7b6851eec73d35d9097baa1f9
   },
   "scripts": {
     "start": "react-scripts start",
