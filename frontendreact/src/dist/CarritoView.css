@@ -24,12 +24,7 @@
     margin-left: 10px;
 }
 
-.tipo {
-    height: 70px;
-    width: 120px;
-}
-
-.cantidad {
+.custom-label {
     height: 70px;
     width: 120px;
 }

@@ -60,7 +60,7 @@ public class Server extends ResultFactory {
 
         List<TipoChocolateFront> data =
                 this.tiposChocolate.recuperarTodos().stream().map(t -> new TipoChocolateFront
-                        (t.getClass().getSimpleName(), t.getImg())).collect(Collectors.toList());
+                        (t.getClass().getSimpleName())).collect(Collectors.toList());
 
 
 
@@ -85,7 +85,7 @@ public class Server extends ResultFactory {
 
         List<TamanioFront> data =
                 this.tamanio.recuperarTodos().stream().map( t -> new TamanioFront
-                        (t.getClass().getSimpleName(), t.getImg())).collect(Collectors.toList());
+                        (t.getClass().getSimpleName(), t.getPrice())).collect(Collectors.toList());
 
 
         return ResultFactory.ok(this.JSONUtils.toJson(data));
@@ -98,7 +98,7 @@ public class Server extends ResultFactory {
 
         List<FormaFront> data =
                 this.serviceFormas.recuperarTodos().stream().map(t -> new FormaFront
-                        (t.getClass().getSimpleName(), t.getImg())).collect(Collectors.toList());
+                        (t.getClass().getSimpleName(), t.getImg(), t.getPrice())).collect(Collectors.toList());
 
 
         return ResultFactory.ok(this.JSONUtils.toJson(data));

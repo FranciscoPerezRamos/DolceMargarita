@@ -21,12 +21,33 @@ export default class BuyHuevos extends BuyProduct {
         return "Increibles huevos de chocolates de diferentes tamaños";
     }
 
+    selectTamanio = (selectTamanio) => {
+        this.setState({tamanioSeleccionado: selectTamanio})
+    }
+
     renderTamaniosDeChocolate() {
         return(
             <div>
-                <Selector options={this.state.tamanios}  />
+                <Selector options={this.state.tamanios} selectOption={this.selectTamanio} />
             </div>
         );
+    }
+
+    agregarAlCarrito = () => {
+
+        const precio = this.state.quantity * (this.props.precio + parseInt(this.state.tamanioSeleccionado.price));
+
+
+        let producto = {
+            forma: 'Huevo',
+            tamanio: this.state.tamanioSeleccionado.nombre,
+            tipo: this.state.tipoSeleccionado.nombre,
+            cantidad: this.state.quantity,
+            precio: precio,
+        }
+        this.props.setCarrito(producto);
+     
+        this.props.history.push('/carrito');
     }
 
     renderItems() {

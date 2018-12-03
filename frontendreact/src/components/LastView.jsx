@@ -1,51 +1,59 @@
 import React from 'react';
 import Ionicon from 'react-ionicons';
 import '../dist/LastView.css';
-import CreditCardInput from 'react-credit-card-input';
+import API from '../service/api.js';
 import ProductoEnCarrito from './ProductoEnCarrito'
 
 export default class LastView extends React.Component {
-  carrito = []
   constructor(props) {
     super(props)
-
     this.state = {
+      id: 1,
       nombreCliente: "",
       apellidoCliente: "",
       emailCliente: "",
       dniCliente: null,
       telefonoCliente: null,
+      precio: this.calcularPrecio(),
     };
   }
 
   finishSell() {
-    return (
-      <div>
-        <h2>Su pedido se encuentra siendo procesado.
-                Muchas Gracias por elegirnos
-        </h2>
-      </div>
-    );
+    API.post("/testMP", {
+      "id": this.state.id,
+      "title": "Pedido",
+      "quantity": 1,
+      "currencyId": "ARS",
+      "unitePrice": this.state.precio,
+      "email": this.state.emailCliente,
+    }).then(response => window.location.assign(response))
+    .catch(console.log("no se esta haciendo correctamente el post gg"));
+    
+    this.setState({id: this.state.id + 1});
   }
 
-  setNombre = (nombre) => {
-    this.setState({nombreCliente: nombre})
+  calcularPrecio() {
+    return this.props.carrito.map(product => product.precio).reduce(function(a, b){ return a + b; });
   }
 
-  setNombre(apellido) {
-    this.setState({apellidoCliente: apellido})
+  setNombre = (event) => {
+    this.setState({nombreCliente: event.target.value})
   }
 
-  setEmail(email) {
-    this.setState({emailCliente: email})
+  setApellido = (event) => {
+    this.setState({apellidoCliente: event.target.value})
   }
 
-  setDni(dni) {
-    this.setState({dniCliente: dni})
+  setEmail = (event) => {
+    this.setState({emailCliente: event.target.value})
   }
 
-  setTelefono(telefono) {
-    this.setState({telefonoCliente: telefono})
+  setDni = (event) => {
+    this.setState({dniCliente: event.target.value})
+  }
+
+  setTelefono = (event) => {
+    this.setState({telefonoCliente: event.target.value})
   }
 
   mostrarProductos = () => {
@@ -53,7 +61,7 @@ export default class LastView extends React.Component {
       <div>
         <h4 align="center" className="titulo">Tu Pedido</h4>
         { 
-          this.carrito.map((producto) =>
+          this.props.carrito.map((producto) =>
             <ProductoEnCarrito
               producto={producto}
             />

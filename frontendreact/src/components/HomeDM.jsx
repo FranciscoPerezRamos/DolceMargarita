@@ -16,7 +16,7 @@ export default class HomeDM extends React.Component {
   }
 
   componentDidMount() {
-    API.get('/formas')
+    API.get('/serviceFormas')
       .then(response => this.setState({ formas: response }))
       .catch(console.log);
   }
@@ -73,9 +73,9 @@ export default class HomeDM extends React.Component {
          <h3 align="left">
           Precios <br></br>
           
-          Figuras: Desde $300
-          Huevos : $20- $1800
-          Bombones: Kg $1500
+          Figuras: Desde $350
+          Huevos : $600-$800-$1200
+          Bombones: Kg $2000
           </h3>
         </BackSide>
       </Flippy>
@@ -83,6 +83,7 @@ export default class HomeDM extends React.Component {
   }
 
   seleccionarForma = (item) => {
+    this.props.setPrecio(item.price)
     this.props.history.push(`product/${item.nombre}`)
   }
   

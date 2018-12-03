@@ -10,13 +10,14 @@ public abstract class Tamanio {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    private String img;
+    private Integer price;
 
     public Tamanio(){}
 
     public Integer getId(){ return this.id;}
 
-    public void addImg(String img) { this.img = img; }
 
-    public String getImg() { return this.img; }
+    public void addPrice(Integer price) { this.price = price; }
+
+    public Integer getPrice() { return this.price; }
 }

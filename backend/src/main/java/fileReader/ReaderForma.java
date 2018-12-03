@@ -15,6 +15,7 @@ public class ReaderForma extends CSVFileReader<Forma> {
         try {
             Forma forma = (Forma) Class.forName(line[2].trim()).newInstance();
             forma.addImg(line[3].trim());
+            forma.addPrice(Integer.valueOf(line[4]));
             return forma;
         } catch (InstantiationException e) {
             e.printStackTrace();
