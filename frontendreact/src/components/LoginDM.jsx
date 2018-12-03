@@ -48,7 +48,7 @@ class LoginDM extends React.Component {
   renderGoogleButton(text) {
     return(
       <button
-      className="btn-dm"
+      className="btn-dm2"
       type="button"
       onClick={() => this.googleLogin()}
     >
@@ -59,7 +59,7 @@ class LoginDM extends React.Component {
   renderButtonWithFunction(text) {
     return(
       <button
-      className="btn-dm"
+      className="btn-dm2"
       type="button"
       onClick={() => this.startHome()}
     >

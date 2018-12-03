@@ -26,6 +26,10 @@ export default class Facebook extends Component {
 
   componentClicked = () => console.log("clicked");
 
+  irALogin = () => {
+    this.props.history.push('/');
+  }
+
   render() {
     let fbContent;
 
@@ -40,8 +44,13 @@ export default class Facebook extends Component {
           }}
         >
           <img src={this.state.picture} alt={this.state.name} />
-          <h2>Welcome {this.state.name}</h2>
-          Email: {this.state.email}
+          <h4>Bienvenido a Dolce Margarita</h4>
+          <div> <h6> Nombre: {this.state.name}</h6> </div>
+          <div> <h6> UserID: {this.state.userID}</h6> </div> 
+          <div> <h6> Email: {this.state.email}</h6> </div>
+          <button onClick={this.irALogin}>
+              <h6>Volver</h6>
+            </button>
         </div>
       );
     } else {
