@@ -6,6 +6,9 @@ body{
   text-decoration-color: #13130e;
 }
 
+h5 {
+  font-size: 25px;
+}
 .flex {
   display: flex;
 }
