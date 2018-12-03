@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import FacebookLogin from "react-facebook-login";
+import '../dist/LoginDm.css';
+import Ionicon from 'react-ionicons';
 
 export default class Facebook extends Component {
   state = {
@@ -50,6 +52,9 @@ export default class Facebook extends Component {
           fields="name,email,picture"
           onClick={this.componentClicked}
           callback={this.responseFacebook}
+          cssClass="btn-dm"
+          icon={ <Ionicon icon="logo-facebook" />  }
+          textButton="Registrarse con Facebook"
         />
       );
     }

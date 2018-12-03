@@ -3,6 +3,7 @@ import '../dist/LoginDm.css';
 import Carousel from 'nuka-carousel';
 import Ionicon from 'react-ionicons';
 import { Link } from 'react-router-dom';
+import Facebook from './Facebook.jsx';
 
 
 
@@ -90,17 +91,7 @@ class LoginDM extends React.Component {
             {this.renderTitle('Dolce margarita')}
             {this.renderTextForLogdinDM()}
           </div>
-          <Link to="/login">              
-          
-          <button 
-           type="button" 
-          className="btn-dm">
-          Iniciar sesion en Facebook
-           <Ionicon icon="logo-facebook"
-           fontSize="25px" /></button>
-
-          </Link>
-
+          <Facebook />
           
           {this.renderButtonWithFunction('Empezar')}
           
